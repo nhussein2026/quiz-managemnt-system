@@ -17,11 +17,11 @@ public class Student {
     
     //Creating the setters  & getters
 
-    public String getStdname() {
+    public String getStdName() {
         return stdName;
     }
 
-    public void setStdname(String stdname) {
+    public void setStdName(String stdname) {
         this.stdName = stdname;
     }
 
