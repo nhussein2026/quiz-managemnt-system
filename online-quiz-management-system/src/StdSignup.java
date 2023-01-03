@@ -289,7 +289,7 @@ public class StdSignup extends javax.swing.JFrame {
         //code to save inserted data for signup
         String stdName = tfStudentName.getText();
         String stdID = tfStudentID.getText();
-        int faculty = cbFaculty.getSelectedIndex();
+        Object faculty = cbFaculty.getSelectedItem();
         String department = tfdepartment.getText();
         String password = pfPassword.getPassword().toString(); //it coms as char type so to string change it to a propriate type
 
@@ -307,13 +307,14 @@ public class StdSignup extends javax.swing.JFrame {
                 Statement stm = con.createStatement(); //it will ccreate a statement object for sending sql statemnet to the satabase
                 //convert stdID from string to integer before sent it to db
                 int stdid = Integer.parseInt(stdID);
-                String sql = "INSERT INTO STUDENT values('" + stdid + "','" + stdName + "','" + faculty +"','" + department +"','" + password +"')";
+                String sql = "INSERT INTO STUDENT values('" + stdid + "','" + stdName + "','" + faculty + "','" + department + "','" + password + "')";
                 stm.execute(sql);
 
                 //display massege of succcessful inserting db
                 JOptionPane.showMessageDialog(this, "You have been sign up successfully.");
                 //close connection
                 con.close();
+                //here I will close the panal and directly goes to sginin panal
                 setVisible(false);
                 new StudentLogin().setVisible(true);
             } catch (Exception e) {
