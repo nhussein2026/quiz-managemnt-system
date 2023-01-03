@@ -1,8 +1,11 @@
+
+import javax.swing.JOptionPane;
+import java.sql.*;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author naser
@@ -34,18 +37,19 @@ public class StdSignup extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         Exit = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        exitLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        tfStudentName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tfStudentID = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbFaculty = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tfdepartment = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        pfPassword = new javax.swing.JPasswordField();
+        btnSignup = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StdSignup");
@@ -141,14 +145,19 @@ public class StdSignup extends javax.swing.JFrame {
         jPanel1.add(SignuptextPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 940, 61));
 
         Exit.setBackground(new java.awt.Color(213, 42, 41));
-
-        jLabel2.setBackground(new java.awt.Color(213, 42, 41));
-        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 36)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("x");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        Exit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                ExitMouseClicked(evt);
+            }
+        });
+
+        exitLabel.setBackground(new java.awt.Color(213, 42, 41));
+        exitLabel.setFont(new java.awt.Font("Segoe UI Emoji", 1, 36)); // NOI18N
+        exitLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exitLabel.setText("x");
+        exitLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitLabelMouseClicked(evt);
             }
         });
 
@@ -158,13 +167,13 @@ public class StdSignup extends javax.swing.JFrame {
             ExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExitLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(exitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         ExitLayout.setVerticalGroup(
             ExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExitLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(exitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 0, -1, -1));
@@ -172,27 +181,27 @@ public class StdSignup extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBackground(new java.awt.Color(230, 230, 230));
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(102, 102, 102)));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfStudentName.setBackground(new java.awt.Color(230, 230, 230));
+        tfStudentName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(102, 102, 102)));
+        tfStudentName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfStudentNameActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 300, 40));
+        jPanel4.add(tfStudentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 300, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabel4.setText("Student Name:");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 110, -1));
 
-        jTextField3.setBackground(new java.awt.Color(230, 230, 230));
-        jTextField3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(102, 102, 102)));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        tfStudentID.setBackground(new java.awt.Color(230, 230, 230));
+        tfStudentID.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(102, 102, 102)));
+        tfStudentID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                tfStudentIDActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 290, 40));
+        jPanel4.add(tfStudentID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 290, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabel6.setText("Student ID:");
@@ -202,31 +211,40 @@ public class StdSignup extends javax.swing.JFrame {
         jLabel7.setText("Faculty:");
         jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 70, 30));
 
-        jComboBox1.setBackground(new java.awt.Color(230, 230, 230));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel4.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 290, 40));
+        cbFaculty.setBackground(new java.awt.Color(230, 230, 230));
+        cbFaculty.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        cbFaculty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Faculty of Engineering", "Faculty of medicine", "Faculty of art and design", "Faculty of Economics" }));
+        jPanel4.add(cbFaculty, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 290, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabel8.setText("Department:");
         jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, 100, 30));
 
-        jTextField2.setBackground(new java.awt.Color(230, 230, 230));
-        jTextField2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(102, 102, 102)));
-        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 290, 40));
+        tfdepartment.setBackground(new java.awt.Color(230, 230, 230));
+        tfdepartment.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(102, 102, 102)));
+        jPanel4.add(tfdepartment, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 290, 40));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabel9.setText("Password:");
         jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 80, -1));
 
-        jPasswordField1.setBackground(new java.awt.Color(230, 230, 230));
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(102, 102, 102)));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        pfPassword.setBackground(new java.awt.Color(230, 230, 230));
+        pfPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(102, 102, 102)));
+        pfPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                pfPasswordActionPerformed(evt);
             }
         });
-        jPanel4.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 290, 40));
+        jPanel4.add(pfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 290, 40));
+
+        btnSignup.setBackground(new java.awt.Color(153, 35, 63));
+        btnSignup.setText("Signup");
+        btnSignup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignupActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 325, 180, 30));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 270, 950, 420));
 
@@ -246,21 +264,66 @@ public class StdSignup extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfStudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfStudentNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tfStudentNameActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void tfStudentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfStudentIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_tfStudentIDActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void pfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_pfPasswordActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void exitLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelMouseClicked
+        setVisible(false);
+        new HomePage().setVisible(true);
+    }//GEN-LAST:event_exitLabelMouseClicked
+
+    private void ExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_ExitMouseClicked
+
+    private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
+        //code to save inserted data for signup
+        String stdName = tfStudentName.getText();
+        String stdID = tfStudentID.getText();
+        int faculty = cbFaculty.getSelectedIndex();
+        String department = tfdepartment.getText();
+        String password = pfPassword.getPassword().toString(); //it coms as char type so to string change it to a propriate type
+
+        //validation that all field are filled
+        if (stdName.isEmpty() || stdID.isEmpty() || department.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please Fill all field in order to complete registeration!!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            //start the code to save data in mysql
+            try {
+                //open db connection
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz_systemdb", "root", "Password1!");
+                // my db name is quiz_systemdb as written above
+
+                Statement stm = con.createStatement(); //it will ccreate a statement object for sending sql statemnet to the satabase
+                //convert stdID from string to integer before sent it to db
+                int stdid = Integer.parseInt(stdID);
+                String sql = "INSERT INTO STUDENT values('" + stdid + "','" + stdName + "','" + faculty +"','" + department +"','" + password +"')";
+                stm.execute(sql);
+
+                //display massege of succcessful inserting db
+                JOptionPane.showMessageDialog(this, "You have been sign up successfully.");
+                //close connection
+                con.close();
+                setVisible(false);
+                new StudentLogin().setVisible(true);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Error ocure!! while trying to send data to database");
+            }
+
+        }
+
+    }//GEN-LAST:event_btnSignupActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,9 +365,10 @@ public class StdSignup extends javax.swing.JFrame {
     private javax.swing.JPanel Exit;
     private javax.swing.JPanel HeroBg;
     private javax.swing.JPanel SignuptextPanel;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnSignup;
+    private javax.swing.JComboBox<String> cbFaculty;
+    private javax.swing.JLabel exitLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -315,9 +379,9 @@ public class StdSignup extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JPasswordField pfPassword;
+    private javax.swing.JTextField tfStudentID;
+    private javax.swing.JTextField tfStudentName;
+    private javax.swing.JTextField tfdepartment;
     // End of variables declaration//GEN-END:variables
 }
