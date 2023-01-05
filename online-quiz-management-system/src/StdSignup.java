@@ -48,8 +48,8 @@ public class StdSignup extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         tfdepartment = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        pfPassword = new javax.swing.JPasswordField();
         btnSignup = new javax.swing.JButton();
+        pfPassword = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StdSignup");
@@ -228,15 +228,6 @@ public class StdSignup extends javax.swing.JFrame {
         jLabel9.setText("Password:");
         jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 80, -1));
 
-        pfPassword.setBackground(new java.awt.Color(230, 230, 230));
-        pfPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(102, 102, 102)));
-        pfPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pfPasswordActionPerformed(evt);
-            }
-        });
-        jPanel4.add(pfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 290, 40));
-
         btnSignup.setBackground(new java.awt.Color(153, 35, 63));
         btnSignup.setText("Signup");
         btnSignup.addActionListener(new java.awt.event.ActionListener() {
@@ -245,6 +236,13 @@ public class StdSignup extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 325, 180, 30));
+
+        pfPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pfPasswordActionPerformed(evt);
+            }
+        });
+        jPanel4.add(pfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, 150, 30));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 270, 950, 420));
 
@@ -272,10 +270,6 @@ public class StdSignup extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfStudentIDActionPerformed
 
-    private void pfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pfPasswordActionPerformed
-
     private void exitLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelMouseClicked
         setVisible(false);
         new HomePage().setVisible(true);
@@ -291,7 +285,7 @@ public class StdSignup extends javax.swing.JFrame {
         String stdID = tfStudentID.getText();
         Object faculty = cbFaculty.getSelectedItem();
         String department = tfdepartment.getText();
-        String password = pfPassword.getPassword().toString(); //it coms as char type so to string change it to a propriate type
+        String password = pfPassword.getText(); //it coms as char type so to string change it to a propriate type
 
         //validation that all field are filled
         if (stdName.isEmpty() || stdID.isEmpty() || department.isEmpty() || password.isEmpty()) {
@@ -307,7 +301,7 @@ public class StdSignup extends javax.swing.JFrame {
                 Statement stm = con.createStatement(); //it will ccreate a statement object for sending sql statemnet to the satabase
                 //convert stdID from string to integer before sent it to db
                 int stdid = Integer.parseInt(stdID);
-                String sql = "INSERT INTO STUDENT values('" + stdid + "','" + stdName + "','" + faculty + "','" + department + "','" + password + "')";
+                String sql = "INSERT INTO STUDENT VALUES('" + stdid + "','" + stdName + "','" + department + "','" + faculty + "','" + password + "')";
                 stm.execute(sql);
 
                 //display massege of succcessful inserting db
@@ -325,6 +319,10 @@ public class StdSignup extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnSignupActionPerformed
+
+    private void pfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pfPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -380,7 +378,7 @@ public class StdSignup extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPasswordField pfPassword;
+    private javax.swing.JTextField pfPassword;
     private javax.swing.JTextField tfStudentID;
     private javax.swing.JTextField tfStudentName;
     private javax.swing.JTextField tfdepartment;
