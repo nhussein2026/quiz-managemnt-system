@@ -37,12 +37,15 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         HomeTabPanals = new javax.swing.JTabbedPane();
+        TeacherHomePage = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
         AddNewCourse = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         tfCourseID = new javax.swing.JTextField();
@@ -54,11 +57,36 @@ public class TeacherHomePage extends javax.swing.JFrame {
         AddNewExam = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jLabel20 = new javax.swing.JLabel();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        jRadioButton7 = new javax.swing.JRadioButton();
+        jRadioButton8 = new javax.swing.JRadioButton();
+        jLabel21 = new javax.swing.JLabel();
+        jRadioButton9 = new javax.swing.JRadioButton();
+        jRadioButton10 = new javax.swing.JRadioButton();
+        jRadioButton11 = new javax.swing.JRadioButton();
+        jRadioButton12 = new javax.swing.JRadioButton();
         StudentsGrade = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -85,7 +113,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 220, 60));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 210, 60));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -99,7 +127,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
                 jLabel4MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 210, 60));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 210, 60));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -113,9 +141,22 @@ public class TeacherHomePage extends javax.swing.JFrame {
                 jLabel5MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 210, 60));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 210, 60));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 760));
+        jLabel23.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImgPackage/home-3116.png"))); // NOI18N
+        jLabel23.setText("Home");
+        jLabel23.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(204, 204, 204)));
+        jLabel23.setIconTextGap(7);
+        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel23MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 210, 60));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 770));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -196,6 +237,32 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jPanel4.getAccessibleContext().setAccessibleName("");
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 1150, 120));
+
+        TeacherHomePage.setBackground(new java.awt.Color(170, 170, 170));
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Welcome ");
+        jLabel22.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout TeacherHomePageLayout = new javax.swing.GroupLayout(TeacherHomePage);
+        TeacherHomePage.setLayout(TeacherHomePageLayout);
+        TeacherHomePageLayout.setHorizontalGroup(
+            TeacherHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TeacherHomePageLayout.createSequentialGroup()
+                .addGap(381, 381, 381)
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(586, Short.MAX_VALUE))
+        );
+        TeacherHomePageLayout.setVerticalGroup(
+            TeacherHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TeacherHomePageLayout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(jLabel22)
+                .addContainerGap(548, Short.MAX_VALUE))
+        );
+
+        HomeTabPanals.addTab("tab5", TeacherHomePage);
 
         AddNewCourse.setBackground(new java.awt.Color(220, 220, 220));
 
@@ -297,6 +364,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
         HomeTabPanals.addTab("Add Course", AddNewCourse);
 
         AddNewExam.setBackground(new java.awt.Color(255, 255, 255));
+        AddNewExam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel12.setBackground(new java.awt.Color(200, 200, 200));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -307,16 +375,140 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jLabel9.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         jPanel12.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 190, 50));
 
-        javax.swing.GroupLayout AddNewExamLayout = new javax.swing.GroupLayout(AddNewExam);
-        AddNewExam.setLayout(AddNewExamLayout);
-        AddNewExamLayout.setHorizontalGroup(
-            AddNewExamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel8.setBackground(new java.awt.Color(170, 170, 170));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel11.setText("Student ID:");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel13.setText("Stuudent Name:");
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel15.setText("Question No:");
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel17.setText("Grade:");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18))))
         );
-        AddNewExamLayout.setVerticalGroup(
-            AddNewExamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
+
+        jPanel12.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 270, 710));
+
+        jPanel13.setBackground(new java.awt.Color(170, 170, 170));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel12.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 900, -1));
+
+        jLabel19.setText("Question:");
+        jPanel12.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 70, 40));
+
+        jRadioButton1.setText("jRadioButton1");
+        jPanel12.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, -1, -1));
+
+        jRadioButton2.setText("jRadioButton2");
+        jPanel12.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, -1, -1));
+
+        jRadioButton3.setText("jRadioButton3");
+        jPanel12.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, -1, -1));
+
+        jRadioButton4.setText("jRadioButton4");
+        jPanel12.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 240, -1, -1));
+
+        jLabel20.setText("jLabel20");
+        jPanel12.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, -1, -1));
+
+        jRadioButton5.setText("jRadioButton5");
+        jPanel12.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, -1, -1));
+
+        jRadioButton6.setText("jRadioButton6");
+        jPanel12.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, -1, -1));
+
+        jRadioButton7.setText("jRadioButton7");
+        jPanel12.add(jRadioButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, -1, -1));
+
+        jRadioButton8.setText("jRadioButton8");
+        jPanel12.add(jRadioButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 380, -1, -1));
+
+        jLabel21.setText("jLabel21");
+        jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, -1, -1));
+
+        jRadioButton9.setText("jRadioButton9");
+        jPanel12.add(jRadioButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 540, -1, -1));
+
+        jRadioButton10.setText("jRadioButton10");
+        jPanel12.add(jRadioButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 550, -1, -1));
+
+        jRadioButton11.setText("jRadioButton11");
+        jPanel12.add(jRadioButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 540, -1, -1));
+
+        jRadioButton12.setText("jRadioButton12");
+        jPanel12.add(jRadioButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 540, -1, -1));
+
+        AddNewExam.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -7, -1, 660));
 
         HomeTabPanals.addTab("Add Exam", AddNewExam);
 
@@ -342,28 +534,34 @@ public class TeacherHomePage extends javax.swing.JFrame {
 
         HomeTabPanals.addTab("Student Grade", StudentsGrade);
 
+        jPanel9.setBackground(new java.awt.Color(20, 20, 2));
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1145, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 653, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-
-        HomeTabPanals.addTab("tab5", jPanel9);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1145, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(123, 123, 123)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(922, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 653, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(383, Short.MAX_VALUE))
         );
 
         HomeTabPanals.addTab("tab1", jPanel5);
@@ -440,16 +638,20 @@ public class TeacherHomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        HomeTabPanals.setSelectedIndex(4);
+        HomeTabPanals.setSelectedIndex(1);
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        HomeTabPanals.setSelectedIndex(1);
+        HomeTabPanals.setSelectedIndex(2);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        HomeTabPanals.setSelectedIndex(2);
+        HomeTabPanals.setSelectedIndex(3);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
+        HomeTabPanals.setSelectedIndex(0);
+    }//GEN-LAST:event_jLabel23MouseClicked
 
     /**
      * @param args the command line arguments
@@ -491,10 +693,24 @@ public class TeacherHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel AddNewExam;
     private javax.swing.JTabbedPane HomeTabPanals;
     private javax.swing.JPanel StudentsGrade;
+    private javax.swing.JPanel TeacherHomePage;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -506,13 +722,27 @@ public class TeacherHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton10;
+    private javax.swing.JRadioButton jRadioButton11;
+    private javax.swing.JRadioButton jRadioButton12;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;
+    private javax.swing.JRadioButton jRadioButton8;
+    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JTextField tfCourseID;
     private javax.swing.JTextField tfCourseName;
     // End of variables declaration//GEN-END:variables
