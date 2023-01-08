@@ -49,8 +49,15 @@ public class StudentQuiz extends javax.swing.JFrame {
         }
 
         //to change the question number
-        int questionsId = Integer.parseInt(questionId);
-        questionsId = +1;
+        int questionsId1 = Integer.parseInt(questionId);
+        questionsId1 = questionsId1 +1;
+        questionId = String.valueOf(questionsId1);
+
+        // to clear the radios btns
+        Option1.setSelected(false);
+        Option2.setSelected(false);
+        Option3.setSelected(false);
+        Option4.setSelected(false);
 
         //to hide the nextt btn in last question
         if (questionId.equals("10")) {
@@ -129,7 +136,9 @@ public class StudentQuiz extends javax.swing.JFrame {
 
             Statement stm = con.createStatement(); //it will ccreate a statement object for sending sql statemnet to the satabase
             //convert stdID from string to integer before sent it to db
-
+            
+            
+            
             //the following cod is for displaying id and name of the student
             ResultSet result = stm.executeQuery("select * from student where student_id='" + stdID + "'");
             while (result.next()) {
@@ -146,7 +155,6 @@ public class StudentQuiz extends javax.swing.JFrame {
                 Option3.setText(result1.getString(5));
                 Option4.setText(result1.getString(6));
                 answer = result.getString(7);
-
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -203,6 +211,7 @@ public class StudentQuiz extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         QuestionNumberLabel = new javax.swing.JLabel();
         SecondLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         NameLebal = new javax.swing.JLabel();
@@ -217,7 +226,7 @@ public class StudentQuiz extends javax.swing.JFrame {
         Submitbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation(new java.awt.Point(221, 120));
+        setLocation(new java.awt.Point(220, 120));
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(170, 170, 170));
@@ -300,6 +309,10 @@ public class StudentQuiz extends javax.swing.JFrame {
         SecondLabel.setForeground(new java.awt.Color(255, 0, 0));
         SecondLabel.setText("00");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel6.setText(":");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -335,10 +348,12 @@ public class StudentQuiz extends javax.swing.JFrame {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(MinutesLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(SecondLabel)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(18, 18, 18)))))
+                        .addGap(0, 80, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -356,7 +371,8 @@ public class StudentQuiz extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MinutesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SecondLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SecondLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -460,6 +476,11 @@ public class StudentQuiz extends javax.swing.JFrame {
         Nextbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImgPackage/arrow-next-2825.png"))); // NOI18N
         Nextbtn.setText("Next");
         Nextbtn.setBorder(null);
+        Nextbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NextbtnActionPerformed(evt);
+            }
+        });
         jPanel1.add(Nextbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 560, 120, 40));
 
         Submitbtn.setBackground(new java.awt.Color(153, 35, 63));
@@ -501,8 +522,12 @@ public class StudentQuiz extends javax.swing.JFrame {
 
     private void SubmitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitbtnActionPerformed
         // submit btn code 
-
         int a = JOptionPane.showConfirmDialog(null, "Do you really want to submit your answers?", "Select", JOptionPane.YES_NO_OPTION);
+        if (a == 0)
+        {
+        answerCheck();
+        submit();
+        }
     }//GEN-LAST:event_SubmitbtnActionPerformed
 
     private void Option1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Option1ActionPerformed
@@ -525,7 +550,7 @@ public class StudentQuiz extends javax.swing.JFrame {
     }//GEN-LAST:event_Option2ActionPerformed
 
     private void Option3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Option3ActionPerformed
-         // Code to set just one option
+        // Code to set just one option
         if (Option3.isSelected()) {
             Option1.setSelected(false);
             Option2.setSelected(false);
@@ -534,13 +559,20 @@ public class StudentQuiz extends javax.swing.JFrame {
     }//GEN-LAST:event_Option3ActionPerformed
 
     private void Option4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Option4ActionPerformed
-         // Code to set just one option
+        // Code to set just one option
         if (Option4.isSelected()) {
             Option1.setSelected(false);
             Option2.setSelected(false);
             Option3.setSelected(false);
         }
     }//GEN-LAST:event_Option4ActionPerformed
+
+    private void NextbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextbtnActionPerformed
+        //Next btn code
+        answerCheck();
+        question();
+        
+    }//GEN-LAST:event_NextbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -602,6 +634,7 @@ public class StudentQuiz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
