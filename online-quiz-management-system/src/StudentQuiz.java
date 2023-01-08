@@ -12,6 +12,7 @@ import java.sql.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class StudentQuiz extends javax.swing.JFrame {
@@ -25,6 +26,93 @@ public class StudentQuiz extends javax.swing.JFrame {
     /**
      * Creates new form StudentQuiz
      */
+    //here  is the answer check method
+    public void answerCheck() {
+
+        String studentAnswer = "";
+
+        if (Option1.isSelected()) {
+            studentAnswer = Option1.getText();
+        } else if (Option2.isSelected()) {
+            studentAnswer = Option2.getText();
+        } else if (Option3.isSelected()) {
+            studentAnswer = Option3.getText();
+        } else {
+            studentAnswer = Option4.getText();
+        }
+
+        //check code
+        if (studentAnswer.equals(answer)) {
+            marks += 1;
+            String marks1 = String.valueOf(marks);
+            CorrectAnswersLabel.setText(marks1);
+        }
+
+        //to change the question number
+        int questionsId = Integer.parseInt(questionId);
+        questionsId = +1;
+
+        //to hide the nextt btn in last question
+        if (questionId.equals("10")) {
+            Nextbtn.setVisible(false);
+        }
+
+    }
+
+    //questtion method in order touse the method in the next btn to show the correct answers
+    public void question() {
+
+        try {
+            //open db connection
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz_systemdb", "root", "Password1!");
+            // my db name is quiz_systemdb as written above
+
+            Statement stm = con.createStatement(); //it will ccreate a statement object for sending sql statemnet to the satabase
+            //convert stdID from string to integer before sent it to db
+
+            //start of displaying questions
+            ResultSet result1 = stm.executeQuery("select * from exam where exam_id='" + questionId + "'");
+            while (result1.next()) {
+                QuestionNumberLabel.setText(result1.getString(1));
+                QuestionLabel.setText(result1.getString(2));
+                Option1.setText(result1.getString(3));
+                Option2.setText(result1.getString(4));
+                Option3.setText(result1.getString(5));
+                Option4.setText(result1.getString(6));
+                answer = result1.getString(7);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error ocure!! while trying to send data to database");
+        }
+    }
+
+    //the submit method
+    public void submit() {
+        String stdID = StudentIDLabel.getText();
+        answerCheck();
+
+        try {
+            //open db connection
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz_systemdb", "root", "Password1!");
+            // my db name is quiz_systemdb as written above
+
+            Statement stm = con.createStatement(); //it will ccreate a statement object for sending sql statemnet to the satabase
+            //convert stdID from string to integer before sent it to db
+
+            stm.executeUpdate("update student set grade='" + marks + "'whwere stdID='" + stdID + "'");
+            String marks1 = String.valueOf(marks);
+            JOptionPane.showMessageDialog(null, marks1);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error ocure!! while trying to send data to database");
+        }
+    }
+
     public StudentQuiz() {
         initComponents();
     }
@@ -53,10 +141,10 @@ public class StudentQuiz extends javax.swing.JFrame {
             while (result1.next()) {
                 QuestionNumberLabel.setText(result1.getString(1));
                 QuestionLabel.setText(result1.getString(2));
-                Option1.setText(result.getString(3));
-                Option2.setText(result.getString(4));
-                Option3.setText(result.getString(5));
-                Option4.setText(result.getString(6));
+                Option1.setText(result1.getString(3));
+                Option2.setText(result1.getString(4));
+                Option3.setText(result1.getString(5));
+                Option4.setText(result1.getString(6));
                 answer = result.getString(7);
 
             }
@@ -74,15 +162,19 @@ public class StudentQuiz extends javax.swing.JFrame {
                 MinutesLabel.setText(String.valueOf(min));
 
                 if (sec == 60) {
-                    sec =0;
+                    sec = 0;
                     min++;
-                    if(min==10){
-                    time.stop();
+                    if (min == 10) {
+                        time.stop();
+                        answerCheck();  //htis is to check the correct answer
+                        submit(); //this is to submit my answer        
                     }
                 }
+                sec++;
             }
 
         });
+        time.start(); // the order of starting the time
     }
 
     /**
@@ -103,7 +195,7 @@ public class StudentQuiz extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         MinutesLabel = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        CorrectAnswersLabel = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -181,8 +273,8 @@ public class StudentQuiz extends javax.swing.JFrame {
         MinutesLabel.setForeground(new java.awt.Color(255, 0, 0));
         MinutesLabel.setText("00 ");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        jLabel7.setText("00");
+        CorrectAnswersLabel.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        CorrectAnswersLabel.setText("00");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabel9.setText("Total of Question:");
@@ -228,7 +320,7 @@ public class StudentQuiz extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
+                                    .addComponent(CorrectAnswersLabel)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
@@ -276,7 +368,7 @@ public class StudentQuiz extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CorrectAnswersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(153, 153, 153))
         );
 
@@ -330,16 +422,36 @@ public class StudentQuiz extends javax.swing.JFrame {
         jPanel1.add(QuestionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 630, 50));
 
         Option1.setText("jCheckBox1");
+        Option1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Option1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(Option1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 330, 40));
 
         Option2.setText("jCheckBox2");
         Option2.setPreferredSize(new java.awt.Dimension(87, 30));
+        Option2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Option2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(Option2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, 330, 40));
 
         Option3.setText("jCheckBox3");
+        Option3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Option3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(Option3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, 330, 40));
 
         Option4.setText("jCheckBox4");
+        Option4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Option4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(Option4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, 330, 40));
 
         Nextbtn.setBackground(new java.awt.Color(153, 35, 63));
@@ -357,6 +469,11 @@ public class StudentQuiz extends javax.swing.JFrame {
         Submitbtn.setText("Submit");
         Submitbtn.setBorder(null);
         Submitbtn.setIconTextGap(15);
+        Submitbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubmitbtnActionPerformed(evt);
+            }
+        });
         jPanel1.add(Submitbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 560, 120, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -381,6 +498,49 @@ public class StudentQuiz extends javax.swing.JFrame {
         // exit code 
         dispose();
     }//GEN-LAST:event_ExitPlaceMouseClicked
+
+    private void SubmitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitbtnActionPerformed
+        // submit btn code 
+
+        int a = JOptionPane.showConfirmDialog(null, "Do you really want to submit your answers?", "Select", JOptionPane.YES_NO_OPTION);
+    }//GEN-LAST:event_SubmitbtnActionPerformed
+
+    private void Option1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Option1ActionPerformed
+        // Code to set just one option
+        if (Option1.isSelected()) {
+            Option2.setSelected(false);
+            Option3.setSelected(false);
+            Option4.setSelected(false);
+        }
+
+    }//GEN-LAST:event_Option1ActionPerformed
+
+    private void Option2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Option2ActionPerformed
+        // Code to set just one option
+        if (Option2.isSelected()) {
+            Option1.setSelected(false);
+            Option3.setSelected(false);
+            Option4.setSelected(false);
+        }
+    }//GEN-LAST:event_Option2ActionPerformed
+
+    private void Option3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Option3ActionPerformed
+         // Code to set just one option
+        if (Option3.isSelected()) {
+            Option1.setSelected(false);
+            Option2.setSelected(false);
+            Option4.setSelected(false);
+        }
+    }//GEN-LAST:event_Option3ActionPerformed
+
+    private void Option4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Option4ActionPerformed
+         // Code to set just one option
+        if (Option4.isSelected()) {
+            Option1.setSelected(false);
+            Option2.setSelected(false);
+            Option3.setSelected(false);
+        }
+    }//GEN-LAST:event_Option4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -418,6 +578,7 @@ public class StudentQuiz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CorrectAnswersLabel;
     private javax.swing.JLabel ExitPlace;
     private javax.swing.JLabel MinutesLabel;
     private javax.swing.JLabel NameLebal;
@@ -441,7 +602,6 @@ public class StudentQuiz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
