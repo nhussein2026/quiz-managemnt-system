@@ -1,9 +1,8 @@
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -15,11 +14,37 @@ import javax.swing.JOptionPane;
  */
 public class TeacherHomePage extends javax.swing.JFrame {
 
+    public static int open = 0;
+
     /**
      * Creates new form TeacherHomePage
      */
     public TeacherHomePage() {
         initComponents();
+
+        //starting conncting with db and sending data to mysql
+        try {
+            //open db connectoin
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz_systemdb", "root", "Password1!");
+            //the above info is my db info
+
+            Statement stm = con.createStatement(); //statement is msql varible used for sending data to mysql
+            ResultSet res = stm.executeQuery("Select count(exam_id) from  exam");//exam_id is the id column in db
+            if (res.next()) {
+                int exam_id = res.getInt(1);
+                exam_id = exam_id + 1;
+                String str = String.valueOf(exam_id);
+                questionNo.setText(str);
+            } else {
+                questionNo.setText("1");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error ocure!! while trying to send data to database");
+        }
+
     }
 
     /**
@@ -38,6 +63,9 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        Courses = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -68,20 +96,23 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
         jLabel20 = new javax.swing.JLabel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
         jLabel21 = new javax.swing.JLabel();
-        jRadioButton9 = new javax.swing.JRadioButton();
-        jRadioButton10 = new javax.swing.JRadioButton();
-        jRadioButton11 = new javax.swing.JRadioButton();
-        jRadioButton12 = new javax.swing.JRadioButton();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        btnSave = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        QuestionContent = new javax.swing.JTextField();
+        Option1 = new javax.swing.JTextField();
+        Option2 = new javax.swing.JTextField();
+        Option3 = new javax.swing.JTextField();
+        Option4 = new javax.swing.JTextField();
+        CorrectAnswer = new javax.swing.JTextField();
+        questionNo = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        Course_ID = new javax.swing.JTextField();
         StudentsGrade = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -99,7 +130,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImgPackage/nisantasi-logo-for-home-dark.png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 130));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 220, 130));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,7 +172,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
                 jLabel5MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 210, 60));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 210, 60));
 
         jLabel23.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,6 +186,40 @@ public class TeacherHomePage extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 210, 60));
+
+        jLabel29.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("Courses");
+        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, -1, -1));
+
+        Courses.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        Courses.setForeground(new java.awt.Color(255, 255, 255));
+        Courses.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Courses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImgPackage/online-education-7551.png"))); // NOI18N
+        Courses.setText("Courses");
+        Courses.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
+        Courses.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        Courses.setIconTextGap(10);
+        Courses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CoursesMouseClicked(evt);
+            }
+        });
+        jPanel2.add(Courses, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 210, 50));
+
+        jLabel30.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImgPackage/question-mark-13276.png"))); // NOI18N
+        jLabel30.setText(" Questions");
+        jLabel30.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(204, 204, 204)));
+        jLabel30.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel30MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 210, 55));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 770));
 
@@ -190,6 +255,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jPanel11.setPreferredSize(new java.awt.Dimension(35, 35));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("x");
         jLabel8.setPreferredSize(new java.awt.Dimension(35, 35));
@@ -331,7 +397,10 @@ public class TeacherHomePage extends javax.swing.JFrame {
                 .addGap(49, 49, 49))
         );
 
-        jButton1.setText("Add The Course");
+        jButton1.setBackground(new java.awt.Color(153, 35, 63));
+        jButton1.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jButton1.setText("Add  Course");
+        jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -356,8 +425,8 @@ public class TeacherHomePage extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
 
@@ -416,7 +485,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
                                 .addComponent(jLabel15)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 10, Short.MAX_VALUE))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -443,10 +512,10 @@ public class TeacherHomePage extends javax.swing.JFrame {
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel12.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 270, 710));
+        jPanel12.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 710));
 
         jPanel13.setBackground(new java.awt.Color(170, 170, 170));
 
@@ -463,52 +532,104 @@ public class TeacherHomePage extends javax.swing.JFrame {
 
         jPanel12.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 900, -1));
 
-        jLabel19.setText("Question:");
-        jPanel12.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 70, 40));
+        jLabel19.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel19.setText("Question No:");
+        jPanel12.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 110, 30));
 
-        jRadioButton1.setText("jRadioButton1");
-        jPanel12.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, -1, -1));
+        jLabel20.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel20.setText("Question:");
+        jPanel12.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 110, 30));
 
-        jRadioButton2.setText("jRadioButton2");
-        jPanel12.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, -1, -1));
+        jLabel21.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel21.setText("Option 1:");
+        jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 110, 30));
 
-        jRadioButton3.setText("jRadioButton3");
-        jPanel12.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, -1, -1));
+        jLabel24.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel24.setText("Option 2:");
+        jPanel12.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 110, 30));
 
-        jRadioButton4.setText("jRadioButton4");
-        jPanel12.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 240, -1, -1));
+        jLabel26.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel26.setText("Option 3:");
+        jPanel12.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 110, 30));
 
-        jLabel20.setText("jLabel20");
-        jPanel12.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, -1, -1));
+        jLabel27.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel27.setText("Option 4:");
+        jPanel12.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, 110, 30));
 
-        jRadioButton5.setText("jRadioButton5");
-        jPanel12.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, -1, -1));
+        jLabel28.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel28.setText("Correct Option:");
+        jPanel12.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 110, 40));
 
-        jRadioButton6.setText("jRadioButton6");
-        jPanel12.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, -1, -1));
+        btnSave.setBackground(new java.awt.Color(153, 35, 63));
+        btnSave.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImgPackage/save-5353.png"))); // NOI18N
+        btnSave.setText("Save");
+        btnSave.setBorder(null);
+        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnSave.setIconTextGap(22);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        jPanel12.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 590, 150, 40));
 
-        jRadioButton7.setText("jRadioButton7");
-        jPanel12.add(jRadioButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, -1, -1));
+        jButton3.setBackground(new java.awt.Color(76, 161, 68));
+        jButton3.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImgPackage/eraser-14529.png"))); // NOI18N
+        jButton3.setText("Clear");
+        jButton3.setBorder(null);
+        jButton3.setIconTextGap(10);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 590, 130, 40));
 
-        jRadioButton8.setText("jRadioButton8");
-        jPanel12.add(jRadioButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 380, -1, -1));
+        QuestionContent.setBackground(new java.awt.Color(240, 240, 240));
+        QuestionContent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QuestionContentActionPerformed(evt);
+            }
+        });
+        jPanel12.add(QuestionContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 400, 30));
 
-        jLabel21.setText("jLabel21");
-        jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, -1, -1));
+        Option1.setBackground(new java.awt.Color(240, 240, 240));
+        jPanel12.add(Option1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 400, 30));
 
-        jRadioButton9.setText("jRadioButton9");
-        jPanel12.add(jRadioButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 540, -1, -1));
+        Option2.setBackground(new java.awt.Color(240, 240, 240));
+        jPanel12.add(Option2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 400, 30));
 
-        jRadioButton10.setText("jRadioButton10");
-        jPanel12.add(jRadioButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 550, -1, -1));
+        Option3.setBackground(new java.awt.Color(240, 240, 240));
+        jPanel12.add(Option3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, 400, 30));
 
-        jRadioButton11.setText("jRadioButton11");
-        jPanel12.add(jRadioButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 540, -1, -1));
+        Option4.setBackground(new java.awt.Color(240, 240, 240));
+        jPanel12.add(Option4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 400, 30));
 
-        jRadioButton12.setText("jRadioButton12");
-        jPanel12.add(jRadioButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 540, -1, -1));
+        CorrectAnswer.setBackground(new java.awt.Color(240, 240, 240));
+        jPanel12.add(CorrectAnswer, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 460, 400, 30));
 
-        AddNewExam.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -7, -1, 660));
+        questionNo.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        questionNo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel12.add(questionNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 100, 30));
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabel25.setText("Course No:");
+        jPanel12.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 520, 80, 30));
+
+        Course_ID.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        Course_ID.setBorder(null);
+        jPanel12.add(Course_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, 400, 30));
+
+        AddNewExam.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
 
         HomeTabPanals.addTab("Add Exam", AddNewExam);
 
@@ -622,7 +743,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
                 //close Connection
                 con.close();
                 setVisible(false);
-                
+
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 System.out.println("Error ocure!! while trying to send data to database");
@@ -642,7 +763,16 @@ public class TeacherHomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        HomeTabPanals.setSelectedIndex(2);
+        //this is the place of adding new exam
+        if (open == 0) {
+            HomeTabPanals.setSelectedIndex(2);
+//            new AddNewQuestion().setVisible(true);
+            open = 1;
+        } else {
+            JFrame jf = new JFrame();
+            jf.setAlwaysOnTop(true);
+            JOptionPane.showMessageDialog(jf, "There is one form opent already");
+        }
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -652,6 +782,81 @@ public class TeacherHomePage extends javax.swing.JFrame {
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
         HomeTabPanals.setSelectedIndex(0);
     }//GEN-LAST:event_jLabel23MouseClicked
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // Save btn code
+        String id = questionNo.getText();
+        String question = QuestionContent.getText();
+        String option1 = Option1.getText();
+        String option2 = Option2.getText();
+        String option3 = Option3.getText();
+        String option4 = Option4.getText();
+        String correct_answer = CorrectAnswer.getText();
+        String course_id = Course_ID.getText();
+
+
+        // here will start the code in order to insert the qestion to the db
+        try {
+            //open db connectoin
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz_systemdb", "root", "Password1!");
+            //the above info is my db info
+
+            PreparedStatement ps = con.prepareStatement("insert into exam values(?,?,?,?,?,?,?,?)");
+            ps.setString(1, id);
+            ps.setString(2, question);
+            ps.setString(3, option1);
+            ps.setString(4, option2);
+            ps.setString(5, option3);
+            ps.setString(6, option4);
+            ps.setString(7, correct_answer);
+            ps.setString(8,course_id);
+            ps.executeUpdate();
+            JFrame jf = new JFrame();
+            jf.setAlwaysOnTop(true);
+            JOptionPane.showMessageDialog(jf, "A new  Question has been Add successfully");
+            QuestionContent.setText("");
+            Option1.setText("");
+            Option2.setText("");
+            Option3.setText("");
+            Option4.setText("");
+            CorrectAnswer.setText("");
+            Course_ID.setText("");
+
+            
+
+        } catch (Exception e) {
+            JFrame jf = new JFrame();
+            jf.setAlwaysOnTop(true);
+            JOptionPane.showMessageDialog(jf, e.getMessage());
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // Here is the code of cleare to clear the adding questions panal
+        questionNo.setText("");
+        QuestionContent.setText("");
+        Option1.setText("");
+        Option2.setText("");
+        Option3.setText("");
+        Option4.setText("");
+        CorrectAnswer.setText("");
+        Course_ID.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void QuestionContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuestionContentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_QuestionContentActionPerformed
+
+    private void CoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CoursesMouseClicked
+        // here is the code of showing all courses
+        new AllCourses().setVisible(true);
+    }//GEN-LAST:event_CoursesMouseClicked
+
+    private void jLabel30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseClicked
+        // here is the customization of the questions click
+        new AllQuestions().setVisible(true);
+    }//GEN-LAST:event_jLabel30MouseClicked
 
     /**
      * @param args the command line arguments
@@ -691,10 +896,20 @@ public class TeacherHomePage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddNewCourse;
     private javax.swing.JPanel AddNewExam;
+    private javax.swing.JTextField CorrectAnswer;
+    private javax.swing.JTextField Course_ID;
+    private javax.swing.JLabel Courses;
     private javax.swing.JTabbedPane HomeTabPanals;
+    private javax.swing.JTextField Option1;
+    private javax.swing.JTextField Option2;
+    private javax.swing.JTextField Option3;
+    private javax.swing.JTextField Option4;
+    private javax.swing.JTextField QuestionContent;
     private javax.swing.JPanel StudentsGrade;
     private javax.swing.JPanel TeacherHomePage;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -711,7 +926,14 @@ public class TeacherHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -731,18 +953,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton11;
-    private javax.swing.JRadioButton jRadioButton12;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
+    private javax.swing.JLabel questionNo;
     private javax.swing.JTextField tfCourseID;
     private javax.swing.JTextField tfCourseName;
     // End of variables declaration//GEN-END:variables
