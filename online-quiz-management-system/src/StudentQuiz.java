@@ -88,7 +88,6 @@ public class StudentQuiz extends javax.swing.JFrame {
                 Option3.setText(result1.getString(5));
                 Option4.setText(result1.getString(6));
                 answer = result1.getString(7);
-
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -112,7 +111,8 @@ public class StudentQuiz extends javax.swing.JFrame {
 
             stm.executeUpdate("update student set grade='" + marks + "'whwere stdID='" + stdID + "'");
             String marks1 = String.valueOf(marks);
-            JOptionPane.showMessageDialog(null, marks1);
+            setVisible(false);
+            new StudentGrade(marks1).setVisible(true);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
