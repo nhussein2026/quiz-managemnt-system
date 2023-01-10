@@ -45,7 +45,7 @@ public class StdHome extends javax.swing.JFrame {
         webLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation(new java.awt.Point(200, 20));
+        setLocation(new java.awt.Point(150, 20));
         setMinimumSize(new java.awt.Dimension(1066, 690));
         setPreferredSize(new java.awt.Dimension(900, 650));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -79,6 +79,11 @@ public class StdHome extends javax.swing.JFrame {
 
         ProfilePanel.setBackground(new java.awt.Color(0, 0, 0));
         ProfilePanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        ProfilePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ProfilePanelMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -217,6 +222,11 @@ public class StdHome extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ProfilePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfilePanelMouseClicked
+        // showing profile panel
+        new StdProfile().setVisible(true);
+    }//GEN-LAST:event_ProfilePanelMouseClicked
 
     /**
      * @param args the command line arguments
