@@ -22,6 +22,7 @@ public class StudentQuiz extends javax.swing.JFrame {
     public int min = 0;
     public int sec = 0;
     public int marks = 0;
+    public String id;
 
     /**
      * Creates new form StudentQuiz
@@ -97,7 +98,7 @@ public class StudentQuiz extends javax.swing.JFrame {
 
     //the submit method
     public void submit() {
-        String stdID = StudentIDLabel.getText();
+        String id = StudentIDLabel.getText();
         answerCheck();
 
         try {
@@ -109,25 +110,27 @@ public class StudentQuiz extends javax.swing.JFrame {
             Statement stm = con.createStatement(); //it will ccreate a statement object for sending sql statemnet to the satabase
             //convert stdID from string to integer before sent it to db
 
-            stm.executeUpdate("update student set grade='" + marks + "'whwere stdID='" + stdID + "'");
+            stm.executeUpdate("update student set grade='" + marks + "'whwere student_id='" + id + "'");
             String marks1 = String.valueOf(marks);
-            setVisible(false);
-            new StudentGrade(marks1).setVisible(true);
+            dispose();
+            new StdResult(marks1).setVisible(true);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Error ocure!! while trying to send data to database");
+            System.out.println("Error ocure!! while trying to send data to database in submit section");
         }
     }
 
     public StudentQuiz() {
         initComponents();
     }
+  
     Timer time;
 
-    public StudentQuiz(String stdID) {
+    public StudentQuiz(String id, String name) {
         initComponents();
-        StudentIDLabel.setText(stdID);
+        StudentIDLabel.setText(id);
+        NameLebal.setText(name);
         try {
             //open db connection
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -140,7 +143,7 @@ public class StudentQuiz extends javax.swing.JFrame {
             
             
             //the following cod is for displaying id and name of the student
-            ResultSet result = stm.executeQuery("select * from student where student_id='" + stdID + "'");
+            ResultSet result = stm.executeQuery("select * from student where student_id='" + id + "'");
             while (result.next()) {
                 NameLebal.setText(result.getString(2)); //we set number 2 due to thi number is the number of name in db
             }
@@ -155,6 +158,7 @@ public class StudentQuiz extends javax.swing.JFrame {
                 Option3.setText(result1.getString(5));
                 Option4.setText(result1.getString(6));
                 answer = result.getString(7);
+                CourseIdmLabel.setText(result1.getString(8));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -216,7 +220,7 @@ public class StudentQuiz extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         NameLebal = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        CourseIdmLabel = new javax.swing.JLabel();
         QuestionLabel = new javax.swing.JLabel();
         Option1 = new javax.swing.JCheckBox();
         Option2 = new javax.swing.JCheckBox();
@@ -401,8 +405,8 @@ public class StudentQuiz extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabel13.setText("Course ID:");
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        jLabel14.setText("00");
+        CourseIdmLabel.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        CourseIdmLabel.setText("00");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -416,7 +420,7 @@ public class StudentQuiz extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CourseIdmLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(207, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -427,7 +431,7 @@ public class StudentQuiz extends javax.swing.JFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NameLebal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CourseIdmLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
@@ -611,6 +615,7 @@ public class StudentQuiz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CorrectAnswersLabel;
+    private javax.swing.JLabel CourseIdmLabel;
     private javax.swing.JLabel ExitPlace;
     private javax.swing.JLabel MinutesLabel;
     private javax.swing.JLabel NameLebal;
@@ -629,7 +634,6 @@ public class StudentQuiz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
